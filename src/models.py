@@ -150,13 +150,13 @@ class Favorites(db.Model):
         DateTime(timezone=True),
         server_default=func.now())
 
-    # Relationships
+    
     user: Mapped["User"] = relationship(back_populates="favorites")
     character: Mapped[Optional["Character"]] = relationship(back_populates="favorites")
     planet: Mapped[Optional["Planet"]] = relationship(back_populates="favorites")
     vehicle: Mapped[Optional["Vehicle"]] = relationship(back_populates="favorites")
 
-    # Ensure a user can only favorite each item once
+   
     __table_args__ = (
         UniqueConstraint('user_id', 'character_id', name='unique_user_character'),
         UniqueConstraint('user_id', 'planet_id', name='unique_user_planet'),
